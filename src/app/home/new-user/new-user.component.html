@@ -20,6 +20,7 @@
     <input class="form-control" type="password" placeholder="Senha" formControlName="password">
     <app-message *ngIf="newUserForm.get('password')?.errors?.['required'] && newUserForm.get('password')?.touched" message="Senha obrigatória"></app-message>
     <app-message *ngIf="newUserForm.get('password')?.errors?.['minlength'] && newUserForm.get('password')?.touched" message="A senha deve possuir no mínimo 6 caracteres"></app-message>
+    <app-message *ngIf="newUserForm.errors?.['userEqualsPassword']" message="A senha deve ser diferente do usuário"></app-message>
   </div>
   <div class="d-grid gap-2">
     <button class="btn btn-primary">Cadastro</button>
