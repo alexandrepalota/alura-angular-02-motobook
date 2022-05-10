@@ -1,17 +1,17 @@
 <h4 class="text-center">Registre-se e mostre sua moto ao mundo!</h4>
 
-<form class="form mt-4">
+<form class="form mt-4" [formGroup]="newUserForm" (submit)="register()">
   <div class="mb-3">
-    <input class="form-control" type="text" placeholder="email">
+    <input class="form-control" type="text" placeholder="email" formControlName="email">
   </div>
   <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Nome completo">
+    <input class="form-control" type="text" placeholder="Nome completo" formControlName="fullName">
   </div>
   <div class="mb-3">
-    <input class="form-control" type="text" placeholder="Usuário">
+    <input class="form-control" type="text" placeholder="Usuário" formControlName="userName">
   </div>
   <div class="mb-3">
-    <input class="form-control" type="password" placeholder="Senha">
+    <input class="form-control" type="password" placeholder="Senha" formControlName="password">
   </div>
   <div class="d-grid gap-2">
     <button class="btn btn-primary">Cadastro</button>
