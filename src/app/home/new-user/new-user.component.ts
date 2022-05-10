@@ -1,6 +1,6 @@
 import { NewUserService } from './new-user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NewUser } from './new-user';
 
 @Component({
@@ -16,10 +16,12 @@ export class NewUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.newUserForm = this.formBuilder.group({
-      email: [''],
-      fullName: [''],
-      userName: [''],
-      password: ['']
+      // To validate a field, we add an array on the second position of original array
+      // and use the Angular class Validators, and his validations.
+      email: ['', [Validators.required, Validators.email]],
+      fullName: ['', [Validators.required, Validators.minLength(4)]],
+      userName: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
