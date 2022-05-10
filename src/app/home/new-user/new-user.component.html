@@ -13,7 +13,8 @@
   <div class="mb-3">
     <input class="form-control" type="text" placeholder="Usuário" formControlName="userName">
     <app-message *ngIf="newUserForm.get('userName')?.errors?.['required'] && newUserForm.get('userName')?.touched" message="Usuário obrigatório"></app-message>
-    <app-message *ngIf="newUserForm.get('userName')?.errors?.['lowerCase']  && newUserForm.get('userName')?.touched" message="Usuário só pode conter letras minúsculas"></app-message>
+    <app-message *ngIf="newUserForm.get('userName')?.errors?.['lowerCase']  && newUserForm.get('userName')?.touched" message="Usuário só pode ter letras minúsculas"></app-message>
+    <app-message *ngIf="newUserForm.get('userName')?.errors?.['userExists']" message="Usuário já existe"></app-message>
   </div>
   <div class="mb-3">
     <input class="form-control" type="password" placeholder="Senha" formControlName="password">

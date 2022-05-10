@@ -1,3 +1,4 @@
+import { UserExistsService } from './user-exists.service';
 import { NewUserService } from './new-user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +14,7 @@ export class NewUserComponent implements OnInit {
 
   newUserForm!: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private newUserService: NewUserService) { }
+  constructor(private formBuilder: FormBuilder, private newUserService: NewUserService, private userExistsService: UserExistsService) { }
 
   ngOnInit(): void {
     this.newUserForm = this.formBuilder.group({
@@ -21,7 +22,8 @@ export class NewUserComponent implements OnInit {
       // and use the Angular class Validators, and his validations.
       email: ['', [Validators.required, Validators.email]],
       fullName: ['', [Validators.required, Validators.minLength(4)]],
-      userName: ['', [Validators.required, Validators.minLength(4), lowerCaseValidator]],
+      // The array's 3rd position is used for async validations
+      userName: ['', [Validators.required, Validators.minLength(4), lowerCaseValidator], [this.userExistsService.userExists()]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
