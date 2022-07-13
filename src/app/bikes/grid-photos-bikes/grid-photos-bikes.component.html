@@ -1,0 +1,12 @@
+<p class="text-center text-muted" *ngIf="!bikes.length">Desculpe, não há motos</p>
+
+<div class="row">
+  <div *ngFor="let bike of bikes" class="col-4">
+    <a [routerLink]="['/bikes', bike.id]"></a>
+    <app-card>
+      <app-bike [url]="bike.url" [description]="bike.description"></app-bike>
+      <i aria-hidden="true" class="fa fa-heart-o fa-1x me-2">{{ bike.likes }}</i>
+      <i aria-hidden="true" class="fa fa-comment-o fa-1x mx-2">{{ bike.comments }}</i>
+    </app-card>
+  </div>
+</div>
