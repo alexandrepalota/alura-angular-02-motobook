@@ -1,6 +1,9 @@
+import { environment } from 'src/environments/environment';
 import { NewUser } from './new-user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+const API = environment.apiURL
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +13,11 @@ export class NewUserService {
   constructor(private httpClient: HttpClient) { }
 
   createNewUser(newUser: NewUser) {
-    return this.httpClient.post('http://localhost:3000/user/signup', newUser)
+    return this.httpClient.post(`${API}/user/signup`, newUser)
   }
 
   verifyExistingUser(userName: string) {
-    return this.httpClient.get(`http://localhost:3000/user/exists/${userName}`)
+    return this.httpClient.get(`${API}/user/exists/${userName}`)
   }
 
 }
