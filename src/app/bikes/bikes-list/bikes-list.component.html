@@ -1,1 +1,4 @@
-<app-grid-photos-bikes [bikes]="bikes"></app-grid-photos-bikes>
+<div *ngIf="bikes$ | async as bikes">
+  <app-grid-photos-bikes [bikes]="bikes"></app-grid-photos-bikes>
+</div>
+

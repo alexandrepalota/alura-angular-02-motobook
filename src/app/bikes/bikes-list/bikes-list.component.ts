@@ -1,7 +1,10 @@
+import { switchMap } from 'rxjs/operators';
+import { User } from './../../authentication/user/user';
 import { Bikes } from './../bikes';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/authentication/user/user.service';
 import { BikesService } from '../bikes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bikes-list',
@@ -10,19 +13,17 @@ import { BikesService } from '../bikes.service';
 })
 export class BikesListComponent implements OnInit {
 
-  bikes!: Bikes
+  bikes$!: Observable<Bikes>
 
   constructor(private userService: UserService, private bikeService: BikesService) { }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe({
-      next: user => {
-        const userName = user.name ?? '';
-        this.bikeService.listFromUser(userName).subscribe({
-          next: bikes => this.bikes = bikes
-        })
-      }
-    })
+    this.bikes$ = this.userService.getUser().pipe(
+      switchMap(user => {
+        const userName = user.name ?? ''
+        return this.bikeService.listFromUser(userName)
+      })
+    )
   }
 
 }
