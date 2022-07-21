@@ -1,5 +1,5 @@
 import { TokenService } from './../authentication/token.service';
-import { Bikes } from './bikes';
+import { Bike, Bikes } from './bikes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,5 +20,11 @@ export class BikesService {
     return this.httpClient.get<Bikes>(`${API}/${userName}/photos`, {
       headers
     });
+  }
+
+  findById(id: number): Observable<Bike> {
+    const token = this.tokenService.getToken();
+    const headers = new HttpHeaders().append('x-access-token', token)
+    return this.httpClient.get<Bike>(`${API}/${id}`, {headers})
   }
 }

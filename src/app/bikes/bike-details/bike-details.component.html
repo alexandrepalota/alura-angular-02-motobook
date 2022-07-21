@@ -1,0 +1,12 @@
+<div class="bg-white border" *ngIf="bike$ | async as bike">
+  <div class="row">
+    <div class="col-lg-8">
+      <app-bike [url]="bike.url" [description]="bike.description"></app-bike>
+    </div>
+    <div class="col-lg-4">
+      <small>
+        <p class="text-left break-word">{{ bike.description }}</p>
+      </small>
+    </div>
+  </div>
+</div>
